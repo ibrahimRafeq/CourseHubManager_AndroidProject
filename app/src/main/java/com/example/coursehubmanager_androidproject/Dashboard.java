@@ -77,7 +77,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
     }
-
     private void showAddCourseDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogAddCourseBinding bindingDialog = DialogAddCourseBinding.inflate(getLayoutInflater());
