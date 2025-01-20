@@ -167,8 +167,4 @@ public class Dashboard extends AppCompatActivity {
     public void showEditeLessonDialog(long courseId){}
     public void showDeleteCourseDialog(long courseId, long lessonId){}
     public void showDeleteLessonDialog(long courseId, long lessonId){}
-
-    public void dfgdfgdf(long courseId, long lessonId){}
-
-
 }
