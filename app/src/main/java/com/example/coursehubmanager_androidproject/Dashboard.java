@@ -25,7 +25,7 @@ public class Dashboard extends AppCompatActivity {
     private CourseDataBase courseDB;
     private Notification notification;
     private List<Course> courseList;
-    private CourseAdapter courseAdapter;
+    private DashboardAdapter dashboardAdapter;
     ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
         @Override
         public void onActivityResult(Boolean isGranted) {
@@ -46,14 +46,28 @@ public class Dashboard extends AppCompatActivity {
         notification = new Notification(this);
         courseList = new ArrayList<>();
         courseList.addAll(courseDB.courseDao().getAllCourse());
-        courseAdapter = new CourseAdapter(getApplicationContext(), courseList, new CourseAdapter.OnItemClick() {
+        dashboardAdapter = new DashboardAdapter(getApplicationContext(), courseList, new DashboardAdapter.OnItemClick() {
             @Override
-            public void onCourseClicked(int position) {
+            public void onUpdateClicked(int position) {
+                long id = courseList.get(position).getCourseId();
+                showEditeCourseDialog(id);
+            }
+            @Override
+            public void onDeleteClicked(int position) {
+                long id = courseList.get(position).getCourseId();
+
+            }
+            @Override
+            public void onAddLessonsClicked(int position) {
                 long id = courseList.get(position).getCourseId();
                 showAddLessonsDialog(id);
             }
+            @Override
+            public void onSelectedItem(int position){
+                long id = courseList.get(position).getCourseId();
+            }
         });
-        binding.RVcourses.setAdapter(courseAdapter);
+        binding.RVcourses.setAdapter(dashboardAdapter);
         binding.RVcourses.setLayoutManager(new LinearLayoutManager(this));
 
         binding.addCourse.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +129,6 @@ public class Dashboard extends AppCompatActivity {
         dialog.show();
 
     }
-
     public void showAddLessonsDialog(long courseId){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogAddLessonsBinding bindingDialogLesson = DialogAddLessonsBinding.inflate(getLayoutInflater());
@@ -127,7 +140,7 @@ public class Dashboard extends AppCompatActivity {
                 String lessonTitle = bindingDialogLesson.etTitleLesson.getText().toString();
                 String lessonURL = bindingDialogLesson.etURL.getText().toString();
 
-                    Lessons lessons = new Lessons(lessonTitle, lessonURL,courseId);
+                    Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
                     long id = courseDB.lessonsDao().insertLesson(lessons);
                     lessons.setIdLesson(id);
                     Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
@@ -148,4 +161,11 @@ public class Dashboard extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
     }
+    public void showEditeCourseDialog(long courseId){
+
+    }
+    public void showEditeLessonDialog(long courseId){}
+    public void showDeleteCourseDialog(long courseId, long lessonId){}
+    public void showDeleteLessonDialog(long courseId, long lessonId){}
+
 }
