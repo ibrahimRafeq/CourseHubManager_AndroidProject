@@ -18,8 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.coursehubmanager_androidproject.databinding.ActivityDashboardBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogAddCourseBinding;
-import com.example.coursehubmanager_androidproject.databinding.DialogAddLessonsBinding;
-import com.example.coursehubmanager_androidproject.databinding.DialogEditLessonsBinding;
+import com.example.coursehubmanager_androidproject.databinding.DialogDeleteUserBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogEditeCourseBinding;
 
 import java.util.ArrayList;
@@ -63,13 +62,16 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onDeleteClicked(int position) {
                 long id = courseList.get(position).getCourseId();
+                String category = courseList.get(position).getCategory();
+                String courseName = courseList.get(position).getCourseName();
+                String coursePrice = courseList.get(position).getCoursePrice();
+                int courseNumHours = courseList.get(position).getCourseHours();
+                int courseNumberStudent = courseList.get(position).getCourse_NumberStudent();
+                String courseLecturer = courseList.get(position).getCourseLecturer();
+                String courseDetails = courseList.get(position).getCourseDetails();
+                showDeleteCourseDialog(id, category, courseName, coursePrice, courseNumHours, courseNumberStudent, courseLecturer, courseDetails);
             }
 
-            @Override
-            public void onAddLessonsClicked(int position) {
-                long id = courseList.get(position).getCourseId();
-                showAddLessonsDialog(id);
-            }
 
             @Override
             public void onSelectedItem(int position) {
@@ -124,6 +126,7 @@ public class Dashboard extends AppCompatActivity {
                     long id = courseDB.courseDao().insertCourse(course);
                     course.setCourseId(id);
                     Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
+                    refreshCourseList();
                     dialog.dismiss();
 
                     if (ContextCompat.checkSelfPermission(getApplicationContext(),
@@ -140,38 +143,6 @@ public class Dashboard extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
 
-    }
-
-    public void showAddLessonsDialog(long courseId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        DialogAddLessonsBinding bindingDialogLesson = DialogAddLessonsBinding.inflate(getLayoutInflater());
-        builder.setView(bindingDialogLesson.getRoot());
-
-        bindingDialogLesson.addLessonDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String lessonTitle = bindingDialogLesson.etTitleLesson.getText().toString();
-                String lessonURL = bindingDialogLesson.etURL.getText().toString();
-
-                Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
-                long id = courseDB.lessonsDao().insertLesson(lessons);
-                lessons.setIdLesson(id);
-                Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-                if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                        android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                    notification.createNotification();
-                } else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
-                    }
-                }
-            }
-        });
-
-        dialog = builder.create();
-        dialog.show();
     }
 
     public void showEditeCourseDialog(long courseId) {
@@ -220,44 +191,43 @@ public class Dashboard extends AppCompatActivity {
                 }
             }
         });
-            dialog = builder.create();
-            dialog.show();
-        }
+        dialog = builder.create();
+        dialog.show();
+    }
 
-//    public void showEditeLessonDialog (long courseId){
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            DialogEditLessonsBinding editLessonsBinding = DialogEditLessonsBinding.inflate(getLayoutInflater());
-//            builder.setView(editLessonsBinding.getRoot());
-//
-//        editLessonsBinding.editLessonDialog.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
-//                    String lessonURL = editLessonsBinding.etNewURL.getText().toString();
-//
-//                    Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
-//                    lessons.setIdLesson(id);
-//                    long id = courseDB.lessonsDao().insertLesson(lessons);
-//
-//                    Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
-//                    dialog.dismiss();
-//
-//                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
-//                            android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-//                        notification.createNotification();
-//                    } else {
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//                            launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
-//                        }
-//                    }
-//                }
-//            });
-//
-//            dialog = builder.create();
-//            dialog.show();
-//        }
+    public void showDeleteCourseDialog(long courseId, String category, String courseName, String coursePrice, int courseNumHours, int courseNumberStudent, String courseLecturer, String courseDetails) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        DialogDeleteUserBinding deleteBinding = DialogDeleteUserBinding.inflate(getLayoutInflater());
+        builder.setView(deleteBinding.getRoot());
 
+        deleteBinding.deleteButDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    public void showDeleteCourseDialog ( long courseId, long lessonId){}
-    public void showDeleteLessonDialog ( long courseId, long lessonId){}
+                    Course course = new Course(category, courseName, coursePrice, courseNumHours, courseNumberStudent, courseLecturer, courseDetails);
+                    course.setCourseId(courseId);
+                    long id = courseDB.courseDao().deleteCourse(course);
+                    Toast.makeText(Dashboard.this, "The Delete Was Successfully", Toast.LENGTH_SHORT).show();
+                    refreshCourseList();
+                    dialog.dismiss();
+                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                            android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                        notification.createNotification();
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                        }
+                    }
+                }
+        });
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void refreshCourseList() {
+        courseList.clear();
+        courseList.addAll(courseDB.courseDao().getAllCourse());
+        dashboardAdapter.notifyDataSetChanged();
+    }
+
 }

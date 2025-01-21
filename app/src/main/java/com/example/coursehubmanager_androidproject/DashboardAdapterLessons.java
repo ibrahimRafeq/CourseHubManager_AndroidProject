@@ -45,12 +45,6 @@ public class DashboardAdapterLessons extends RecyclerView.Adapter<RecyclerView.V
             }
         });
 
-//        myViewHolder.lessonDashboardBinding.addLessonsDashboard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                itemClick.onAddLessonsClicked(position);
-//            }
-//        });
 
     }
 
@@ -70,7 +64,5 @@ public class DashboardAdapterLessons extends RecyclerView.Adapter<RecyclerView.V
     public interface OnItemClick{
         void onUpdateClicked(int position);
         void onDeleteClicked(int position);
-        void onAddLessonsClicked(int position);
-
     }
 }

@@ -44,12 +44,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 itemClick.onUpdateClicked(position);
             }
         });
-        myViewHolder.dashboardBinding.addLessonsDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClick.onAddLessonsClicked(position);
-            }
-        });
         myViewHolder.dashboardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,8 +70,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public interface OnItemClick{
         void onUpdateClicked(int position);
         void onDeleteClicked(int position);
-        void onAddLessonsClicked(int position);
         void onSelectedItem(int position);
-
     }
 }

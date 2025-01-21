@@ -6,8 +6,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Course.class, parentColumns = {"courseId"},
-        childColumns = {"course_Id"}))
+@Entity(foreignKeys = @ForeignKey(
+        entity = Course.class,
+        parentColumns = {"courseId"},
+        childColumns = {"course_Id"},
+        onDelete = ForeignKey.CASCADE // إضافة سياسة الحذف
+))
 public class Lessons {
     @PrimaryKey(autoGenerate = true)
     private long idLesson;

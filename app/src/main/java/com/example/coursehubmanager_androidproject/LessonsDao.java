@@ -16,7 +16,7 @@ public interface LessonsDao {
     @Query("select * from Lessons where course_Id =:id")
     List<Lessons> getAllLesson(long id);
     @Query("select * from Lessons where course_Id =:id")
-    List<Lessons> searchProducts(long id);
+    List<Lessons> searchLesson(long id);
     @Delete
-    int deleteProduct(Lessons products);
+    int deleteLesson(Lessons lessons);
 }
