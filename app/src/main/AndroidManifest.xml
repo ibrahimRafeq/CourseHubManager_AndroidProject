@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CourseHubManager_AndroidProject"
         tools:targetApi="31">
         <activity
+            android:name=".CourseLessons_Admin"
+            android:exported="false" />
+        <activity
             android:name=".Bookmark"
             android:exported="false" />
         <activity

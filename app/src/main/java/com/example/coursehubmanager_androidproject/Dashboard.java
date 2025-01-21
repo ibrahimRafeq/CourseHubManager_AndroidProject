@@ -1,6 +1,7 @@
 package com.example.coursehubmanager_androidproject;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class Dashboard extends AppCompatActivity {
     private Notification notification;
     private List<Course> courseList;
     private DashboardAdapter dashboardAdapter;
+    private static final String ID_COURSE_LESSON = "idCourse";
     ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
         @Override
         public void onActivityResult(Boolean isGranted) {
@@ -61,7 +63,6 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onDeleteClicked(int position) {
                 long id = courseList.get(position).getCourseId();
-
             }
 
             @Override
@@ -73,6 +74,10 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onSelectedItem(int position) {
                 long id = courseList.get(position).getCourseId();
+                Intent intent = new Intent(getApplicationContext(), CourseLessons_Admin.class);
+                intent.putExtra(ID_COURSE_LESSON, id);
+                startActivity(intent);
+
             }
         });
         binding.RVcourses.setAdapter(dashboardAdapter);
@@ -219,42 +224,40 @@ public class Dashboard extends AppCompatActivity {
             dialog.show();
         }
 
-    public void showEditeLessonDialog (long courseId){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            DialogEditLessonsBinding editLessonsBinding = DialogEditLessonsBinding.inflate(getLayoutInflater());
-            builder.setView(editLessonsBinding.getRoot());
+//    public void showEditeLessonDialog (long courseId){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            DialogEditLessonsBinding editLessonsBinding = DialogEditLessonsBinding.inflate(getLayoutInflater());
+//            builder.setView(editLessonsBinding.getRoot());
+//
+//        editLessonsBinding.editLessonDialog.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
+//                    String lessonURL = editLessonsBinding.etNewURL.getText().toString();
+//
+//                    Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
+//                    lessons.setIdLesson(id);
+//                    long id = courseDB.lessonsDao().insertLesson(lessons);
+//
+//                    Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//
+//                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
+//                            android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+//                        notification.createNotification();
+//                    } else {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                            launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+//                        }
+//                    }
+//                }
+//            });
+//
+//            dialog = builder.create();
+//            dialog.show();
+//        }
 
-        editLessonsBinding.editLessonDialog.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
-                    String lessonURL = editLessonsBinding.etNewURL.getText().toString();
 
-                    Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
-                    lessons.setIdLesson(id);
-                    long id = courseDB.lessonsDao().insertLesson(lessons);
-
-                    Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                            android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                        notification.createNotification();
-                    } else {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
-                        }
-                    }
-                }
-            });
-
-            dialog = builder.create();
-            dialog.show();
-        }
-
-
-        public void showDeleteCourseDialog ( long courseId, long lessonId){
-        }
-        public void showDeleteLessonDialog ( long courseId, long lessonId){
-        }
-    }
+    public void showDeleteCourseDialog ( long courseId, long lessonId){}
+    public void showDeleteLessonDialog ( long courseId, long lessonId){}
+}
