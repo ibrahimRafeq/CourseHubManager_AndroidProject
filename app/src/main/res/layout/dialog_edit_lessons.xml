@@ -7,11 +7,11 @@
     android:background="#E4E3E3">
 
     <TextView
-        android:id="@+id/textView333"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="do you want to edite this course?"
+        android:text="Where do you want to add this lessoon?"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -28,7 +28,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView333">
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,104 +91,43 @@
     </HorizontalScrollView>
 
     <EditText
-        android:id="@+id/etNameNewCourse"
+        android:id="@+id/etTitleLesson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginTop="16dp"
-        android:hint="Add The New Course Name"
+        android:hint="Add The Course Name"
         android:inputType="text"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/etNewPrice"
+        android:id="@+id/etURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="20dp"
-        android:hint="Add The New Course Price"
+        android:hint="Add The Course Price"
         android:inputType="text"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etNameNewCourse"
+        app:layout_constraintEnd_toEndOf="@+id/etTitleLesson"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etNameNewCourse"
-        app:layout_constraintTop_toBottomOf="@+id/etNameNewCourse"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/NewNumHoursCourse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="12dp"
-        android:hint="Add The Coures New Number Of Hours"
-        android:inputType="number"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etNewPrice"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etNewPrice"
-        app:layout_constraintTop_toBottomOf="@+id/etNewPrice"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/newNumberOfStudent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="4dp"
-        android:hint="Add The New Number Of Student"
-        android:inputType="number"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/NewNumHoursCourse"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/NewNumHoursCourse"
-        app:layout_constraintTop_toBottomOf="@+id/NewNumHoursCourse"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/newNameLecturer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="Add The New Name Lecturer"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/newNumberOfStudent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/newNumberOfStudent"
-        app:layout_constraintTop_toBottomOf="@+id/newNumberOfStudent"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/newCourseDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="28dp"
-        android:hint="Add The New Course Description"
-        android:inputType="text"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/newNameLecturer"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/newNameLecturer"
-        app:layout_constraintTop_toBottomOf="@+id/newNameLecturer"
+        app:layout_constraintStart_toStartOf="@+id/etTitleLesson"
+        app:layout_constraintTop_toBottomOf="@+id/etTitleLesson"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/editeDialog"
+        android:id="@+id/addLessonDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="Edite"
+        android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newCourseDescription" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

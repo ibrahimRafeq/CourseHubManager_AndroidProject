@@ -51,12 +51,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameTheCourse">
 
                 <ImageView
-                    android:id="@+id/deleteCourseDash"
+                    android:id="@+id/addLessonsDashboard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_delete_forever_24" />
+                    android:src="@drawable/baseline_add_24" />
 
                 <ImageView
                     android:id="@+id/editCourseDash"
@@ -65,13 +65,15 @@
                     android:layout_margin="16dp"
                     android:layout_weight="1"
                     android:src="@drawable/baseline_edit_24" />
+
                 <ImageView
-                    android:id="@+id/addLessonsDashboard"
+                    android:id="@+id/deleteCourseDash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_add_24" />
+                    android:src="@drawable/baseline_delete_forever_24" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
