@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.coursehubmanager_androidproject.databinding.ActivityDashboardBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogAddCourseBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogAddLessonsBinding;
+import com.example.coursehubmanager_androidproject.databinding.DialogEditLessonsBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogEditeCourseBinding;
 
 import java.util.ArrayList;
@@ -220,18 +221,19 @@ public class Dashboard extends AppCompatActivity {
 
     public void showEditeLessonDialog (long courseId){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            DialogAddLessonsBinding bindingDialogLesson = DialogAddLessonsBinding.inflate(getLayoutInflater());
-            builder.setView(bindingDialogLesson.getRoot());
+            DialogEditLessonsBinding editLessonsBinding = DialogEditLessonsBinding.inflate(getLayoutInflater());
+            builder.setView(editLessonsBinding.getRoot());
 
-            bindingDialogLesson.addLessonDialog.setOnClickListener(new View.OnClickListener() {
+        editLessonsBinding.editLessonDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String lessonTitle = bindingDialogLesson.etTitleLesson.getText().toString();
-                    String lessonURL = bindingDialogLesson.etURL.getText().toString();
+                    String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
+                    String lessonURL = editLessonsBinding.etNewURL.getText().toString();
 
                     Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
-                    long id = courseDB.lessonsDao().insertLesson(lessons);
                     lessons.setIdLesson(id);
+                    long id = courseDB.lessonsDao().insertLesson(lessons);
+
                     Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
 

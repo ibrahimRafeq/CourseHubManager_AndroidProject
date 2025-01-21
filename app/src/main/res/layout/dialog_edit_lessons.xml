@@ -20,114 +20,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal">
-
-            <RadioGroup
-                android:id="@+id/radioGroupDialog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-                <RadioButton
-                    android:id="@+id/android"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="Andorid" />
-
-                <RadioButton
-                    android:id="@+id/web"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="Web" />
-
-                <RadioButton
-                    android:id="@+id/multiMidea"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="Multi Midea" />
-
-                <RadioButton
-                    android:id="@+id/cyberScurty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="Cyber Scurty" />
-
-                <RadioButton
-                    android:id="@+id/computerScience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="Computer Science" />
-            </RadioGroup>
-        </LinearLayout>
-    </HorizontalScrollView>
 
     <EditText
-        android:id="@+id/etTitleLesson"
+        android:id="@+id/etNewTitleLesson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Add The Course Name"
+        android:hint="Add The New Lesson Name"
         android:inputType="text"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/etURL"
+        android:id="@+id/etNewURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="20dp"
-        android:hint="Add The Course Price"
+        android:hint="Add The New URL"
         android:inputType="text"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etTitleLesson"
+        app:layout_constraintEnd_toEndOf="@+id/etNewTitleLesson"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etTitleLesson"
-        app:layout_constraintTop_toBottomOf="@+id/etTitleLesson"
+        app:layout_constraintStart_toStartOf="@+id/etNewTitleLesson"
+        app:layout_constraintTop_toBottomOf="@+id/etNewTitleLesson"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/addLessonDialog"
+        android:id="@+id/editLessonDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Edit"
+        app:layout_constraintEnd_toEndOf="@+id/etNewURL"
+        app:layout_constraintStart_toStartOf="@+id/etNewURL"
+        app:layout_constraintTop_toBottomOf="@+id/etNewURL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
