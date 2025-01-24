@@ -1,6 +1,9 @@
 package com.example.coursehubmanager_androidproject;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -42,7 +45,7 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            idPerson = getArguments().getLong(ID_PERSON);
+//            idPerson = getArguments().getLong(ID_PERSON);
         }
     }
 
@@ -57,6 +60,8 @@ public class ProfileFragment extends Fragment {
 
         personDB = CourseDataBase.getDataBase(getContext());
         personList = new ArrayList<>();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        idPerson = sharedPreferences.getLong("id_person", -1);
 
         personList.addAll(personDB.personDao().getAllPersonById(idPerson));
         personAdapter = new PersonAdapter(getActivity(), personList);

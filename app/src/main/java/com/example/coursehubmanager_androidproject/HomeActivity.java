@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
                 PerId = intent.getLongExtra("Id_Person", -1);
 
                 if (item.getItemId() == R.id.nav_home) {
-                    addFragment(new HomeFragment());
+                    addFragment(new HomeFragment().newInstance(PerId));
 
                 } else if (item.getItemId() == R.id.nav_myCourses) {
                     addFragment(new myCoursesFragment().newInstance(CorId, PerId));

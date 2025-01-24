@@ -13,19 +13,16 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class HomeFragment extends Fragment {
     private final int count = 5;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_PARAM1 = "idPerson";
+    private long IdPerson;
 
     public HomeFragment() {
     }
 
-    public static HomeFragment newInstance(String param1, String param2) {
+    public static HomeFragment newInstance(long idPerson) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putLong(ARG_PARAM1, idPerson);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,8 +31,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            IdPerson = getArguments().getLong(ARG_PARAM1);
         }
     }
 
@@ -108,7 +104,7 @@ public class HomeFragment extends Fragment {
                     category = "Computer Science";
                     break;
             }
-            return CourseListFragment.newInstance(category);
+            return CourseListFragment.newInstance(category, IdPerson);
         }
 
         @Override

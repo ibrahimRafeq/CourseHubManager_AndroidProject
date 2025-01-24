@@ -1,6 +1,7 @@
 package com.example.coursehubmanager_androidproject;
 
-import android.content.Intent;
+import static android.content.Context.MODE_PRIVATE;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,8 +52,10 @@ public class Completed extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.CourseListRVCompleted);
         courseDB = CourseDataBase.getDataBase(getActivity());
         courseList = new ArrayList<>();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        long idPerson = sharedPreferences.getLong("id_person", -1);
 
-        courseList.addAll(courseDB.courseDao().getCompletedCourses());
+        courseList.addAll(courseDB.personCourseDao().getCompletedCoursesForPerson(idPerson));
         courseAdapter = new CourseAdapter(getActivity(), courseList, new CourseAdapter.OnItemClick() {
             @Override
             public void onCourseClicked(int position) {

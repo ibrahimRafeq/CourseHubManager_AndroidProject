@@ -1,6 +1,7 @@
 package com.example.coursehubmanager_androidproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ public class Course_Content extends AppCompatActivity {
     private CourseDataBase courseDB;
     private static final String ARG_COURSE_ID = "course_Id";
     private long idCourse;
+    private long idPerson;
 
 
     @Override
@@ -29,7 +31,8 @@ public class Course_Content extends AppCompatActivity {
         lessonsList = new ArrayList<>();
         Intent intent = getIntent();
         idCourse =  intent.getLongExtra(ARG_COURSE_ID, -1);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        idPerson = sharedPreferences.getLong("id_person", -1);
 
 //        if (lessonsList.isEmpty()) {
 //            Toast.makeText(this, "No lessons found for this course", Toast.LENGTH_SHORT).show();
@@ -51,7 +54,7 @@ public class Course_Content extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (binding.checkBoxFinished.isChecked()){
-                    courseDB.courseDao().updateCourseCompletion(idCourse);
+                    courseDB.personCourseDao().markCourseAsCompleted(idPerson, idCourse);
                     Toast.makeText(Course_Content.this, "This course has been added to the complete course" , Toast.LENGTH_SHORT).show();
                 }
 
@@ -66,8 +69,8 @@ public class Course_Content extends AppCompatActivity {
         binding.back1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(Course_Content.this, HomeActivity.class);
-                startActivity(intent1);
+                Intent intent = new Intent(Course_Content.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
     }

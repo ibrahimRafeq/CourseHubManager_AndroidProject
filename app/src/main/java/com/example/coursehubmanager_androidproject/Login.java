@@ -13,7 +13,7 @@ import java.util.List;
 public class Login extends AppCompatActivity {
     ActivityLoginBinding binding;
     private CourseDataBase personDB;
-    List<Person> personList;
+    private List<Person> personList;
     private static final String ADMIN_EMAIL = "admin@gmail.com";
     private static final String ADMIN_PASSWORD = "admin";
     private SharedPreferences sharedPreferences;
@@ -21,12 +21,13 @@ public class Login extends AppCompatActivity {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_REMEMBER_ME = "rememberMe";
+    private static final String KEY_ID_PERSON = "id_person"; // مفتاح لتخزين Id_Person
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         personDB = CourseDataBase.getDataBase(this);
         personList = new ArrayList<>();
         personList = personDB.personDao().getAllPerson();
@@ -59,6 +60,9 @@ public class Login extends AppCompatActivity {
                     }
                     if (found) {
                         handleRememberMe(emailP, passwordP);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putLong(KEY_ID_PERSON, personList.get(index).getIdPerson());
+                        editor.apply();
                         Intent intent = new Intent(Login.this, HomeActivity.class);
                         intent.putExtra("Id_Person", personList.get(index).getIdPerson());
                         startActivity(intent);

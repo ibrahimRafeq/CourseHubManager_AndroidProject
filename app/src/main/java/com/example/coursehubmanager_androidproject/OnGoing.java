@@ -20,10 +20,7 @@ public class OnGoing extends Fragment {
     private static final String ARG_PERSON_ID = "Id_Person";
     private long courseId;
     private long personId;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
+
 
     public OnGoing() {
     }
@@ -55,12 +52,11 @@ public class OnGoing extends Fragment {
         courseDB = CourseDataBase.getDataBase(getActivity());
         courseList = new ArrayList<>();
 
-        courseList.addAll(courseDB.courseDao().getJoinedCourses());
+        courseList.addAll(courseDB.personCourseDao().getCoursesForPerson(personId));
         courseAdapter = new CourseAdapter(getActivity(), courseList, new CourseAdapter.OnItemClick() {
             @Override
             public void onCourseClicked(int position) {
                 courseId = courseList.get(position).getCourseId();
-
                 Intent intent = new Intent(getActivity(), Course_Content.class);
                 intent.putExtra(ARG_COURSE_ID, courseId);
                 startActivity(intent);
@@ -68,6 +64,8 @@ public class OnGoing extends Fragment {
         });
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
 
         return view;
     }

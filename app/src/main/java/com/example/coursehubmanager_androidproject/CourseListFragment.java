@@ -15,6 +15,9 @@ import java.util.List;
 
 public class CourseListFragment extends Fragment {
     private static final String ARG_CATEGORY = "category";
+    private static final String ARG_PARAM1 = "idPerson";
+    private  long idPerson;
+
     private String category;
     private CourseDataBase courseDB;
     private List<Course> courseList;
@@ -23,10 +26,11 @@ public class CourseListFragment extends Fragment {
     public CourseListFragment() {
     }
 
-    public static CourseListFragment newInstance(String category) {
+    public static CourseListFragment newInstance(String category, long idPerson) {
         CourseListFragment fragment = new CourseListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_CATEGORY, category);
+        args.putLong(ARG_PARAM1, idPerson);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,6 +40,7 @@ public class CourseListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             category = getArguments().getString(ARG_CATEGORY);
+            idPerson = getArguments().getLong(ARG_PARAM1);
         }
         courseDB = CourseDataBase.getDataBase(getContext());
     }
@@ -53,6 +58,7 @@ public class CourseListFragment extends Fragment {
             @Override
             public void onCourseClicked(int position) {
                 Intent intent = new Intent(getContext(), Details.class);
+                intent.putExtra(ARG_PARAM1, idPerson);
                 intent.putExtra("id", courseList.get(position).getCourseId());
                 startActivity(intent);
             }
