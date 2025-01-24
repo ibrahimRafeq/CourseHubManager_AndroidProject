@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityDetailsBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +44,11 @@ public class Details extends AppCompatActivity {
             @Override
             public void onMyCourseClicked(int position) {
                 long selectedCourseId = courseList.get(position).getCourseId();
-                    PersonCourse personCourse = new PersonCourse(idPerson, selectedCourseId);
-                    personCourse.setPersonId(idPerson);
-                    personCourse.setCourseId(selectedCourseId);
-                    Toast.makeText(Details.this, " "+ idCourse +" "+ idPerson, Toast.LENGTH_SHORT).show();
-                    courseDB.personCourseDao().insertPersonCourse(personCourse);
-//                courseDB.courseDao().joinCourse(selectedCourseId);
+                PersonCourse personCourse = new PersonCourse(idPerson, selectedCourseId);
+                personCourse.setPersonId(idPerson);
+                personCourse.setCourseId(selectedCourseId);
+                Toast.makeText(Details.this, " " + idCourse + " " + idPerson, Toast.LENGTH_SHORT).show();
+                courseDB.personCourseDao().insertPersonCourse(personCourse);
                 Intent intent = new Intent(Details.this, HomeActivity.class);
                 intent.putExtra("course_Id", idCourse);
                 Toast.makeText(Details.this, "The course has been successfully registered", Toast.LENGTH_SHORT).show();

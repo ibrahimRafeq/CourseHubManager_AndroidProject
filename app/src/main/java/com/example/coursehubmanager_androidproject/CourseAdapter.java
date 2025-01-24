@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.coursehubmanager_androidproject.databinding.ItemCourseBinding;
+
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -14,6 +17,7 @@ public class CourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<Course> courseList;
     ItemCourseBinding courseBinding;
     OnItemClick itemClick;
+
     public CourseAdapter(Context context, List<Course> courseList, OnItemClick itemClick) {
         this.context = context;
         this.courseList = courseList;
@@ -49,13 +53,14 @@ public class CourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemCourseBinding courseBinding;
+
         public MyViewHolder(ItemCourseBinding courseBinding) {
             super(courseBinding.getRoot());
             this.courseBinding = courseBinding;
         }
     }
 
-    public interface OnItemClick{
+    public interface OnItemClick {
         void onCourseClicked(int position);
     }
 }

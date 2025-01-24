@@ -204,21 +204,21 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    Course course = new Course(category, courseName, coursePrice, courseNumHours, courseNumberStudent, courseLecturer, courseDetails);
-                    course.setCourseId(courseId);
-                    long id = courseDB.courseDao().deleteCourse(course);
-                    Toast.makeText(Dashboard.this, "The Delete Was Successfully", Toast.LENGTH_SHORT).show();
-                    refreshCourseList();
-                    dialog.dismiss();
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                            android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                        notification.createNotification();
-                    } else {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
-                        }
+                Course course = new Course(category, courseName, coursePrice, courseNumHours, courseNumberStudent, courseLecturer, courseDetails);
+                course.setCourseId(courseId);
+                long id = courseDB.courseDao().deleteCourse(course);
+                Toast.makeText(Dashboard.this, "The Delete Was Successfully", Toast.LENGTH_SHORT).show();
+                refreshCourseList();
+                dialog.dismiss();
+                if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                    notification.createNotification();
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
                     }
                 }
+            }
         });
         dialog = builder.create();
         dialog.show();

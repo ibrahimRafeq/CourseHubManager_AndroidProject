@@ -29,7 +29,6 @@ public class Course {
     private boolean isBookMark;
 
 
-
     public Course(@NonNull String category, @NonNull String courseName, @NonNull String coursePrice, int courseHours, int course_NumberStudent, String courseLecturer, String courseDetails) {
         this.category = category;
         this.courseName = courseName;
@@ -64,7 +63,6 @@ public class Course {
     public void setJoined(boolean isJoined) {
         this.isJoined = isJoined;
     }
-
 
 
     @NonNull

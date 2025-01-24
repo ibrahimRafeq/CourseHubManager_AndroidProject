@@ -3,13 +3,16 @@ package com.example.coursehubmanager_androidproject;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityCourseLessonsAdminBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogAddLessonsBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogDeleteUserBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogEditLessonsBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,6 @@ public class CourseLessons_Admin extends AppCompatActivity {
     private CourseDataBase courseDB;
     private AlertDialog dialog;
     private long idCourse;
-
 
 
     @Override
@@ -61,6 +63,7 @@ public class CourseLessons_Admin extends AppCompatActivity {
             }
         });
     }
+
     public void showAddLessonsDialog(long courseId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogAddLessonsBinding bindingDialogLesson = DialogAddLessonsBinding.inflate(getLayoutInflater());
@@ -86,33 +89,33 @@ public class CourseLessons_Admin extends AppCompatActivity {
         dialog.show();
     }
 
-    public void showEditeLessonDialog (long lessonId){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            DialogEditLessonsBinding editLessonsBinding = DialogEditLessonsBinding.inflate(getLayoutInflater());
-            builder.setView(editLessonsBinding.getRoot());
+    public void showEditeLessonDialog(long lessonId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        DialogEditLessonsBinding editLessonsBinding = DialogEditLessonsBinding.inflate(getLayoutInflater());
+        builder.setView(editLessonsBinding.getRoot());
 
         editLessonsBinding.editLessonDialog.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
-                    String lessonURL = editLessonsBinding.etNewURL.getText().toString();
+            @Override
+            public void onClick(View view) {
+                String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
+                String lessonURL = editLessonsBinding.etNewURL.getText().toString();
 
-                    Lessons lessons = new Lessons(lessonTitle, lessonURL, idCourse);
-                    lessons.setIdLesson(lessonId);
-                    long id = courseDB.lessonsDao().updateLesson(lessons);
+                Lessons lessons = new Lessons(lessonTitle, lessonURL, idCourse);
+                lessons.setIdLesson(lessonId);
+                long id = courseDB.lessonsDao().updateLesson(lessons);
 
-                    Toast.makeText(CourseLessons_Admin.this, "The edition was successfully", Toast.LENGTH_SHORT).show();
-                    refreshLessonList();
-                    dialog.dismiss();
-                }
-            });
+                Toast.makeText(CourseLessons_Admin.this, "The edition was successfully", Toast.LENGTH_SHORT).show();
+                refreshLessonList();
+                dialog.dismiss();
+            }
+        });
 
-            dialog = builder.create();
-            dialog.show();
-        }
+        dialog = builder.create();
+        dialog.show();
+    }
 
 
-    public void deleteLesson(long idLesson, String title, String url){
+    public void deleteLesson(long idLesson, String title, String url) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogDeleteUserBinding bindingDialog = DialogDeleteUserBinding.inflate(getLayoutInflater());
         builder.setView(bindingDialog.getRoot());

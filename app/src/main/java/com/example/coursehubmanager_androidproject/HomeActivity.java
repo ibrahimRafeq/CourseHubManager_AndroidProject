@@ -3,10 +3,12 @@ package com.example.coursehubmanager_androidproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -15,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private long CorId;
     private long PerId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
     private void addFragment(Fragment fragment) {
         fragmentManager.beginTransaction().replace(R.id.main, fragment).commit();
     }

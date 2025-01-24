@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+
 import androidx.core.app.NotificationCompat;
 
 public class Notification {
@@ -18,7 +19,8 @@ public class Notification {
     public Notification(Context context) {
         this.context = context;
     }
-    public void createNotification(){
+
+    public void createNotification() {
         Intent intent = new Intent(context, HomeActivity.class);
         Intent intent2 = new Intent(context, HomeActivity.class);
 

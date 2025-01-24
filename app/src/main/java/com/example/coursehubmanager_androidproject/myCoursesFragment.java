@@ -1,13 +1,16 @@
 package com.example.coursehubmanager_androidproject;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -47,7 +50,7 @@ public class myCoursesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_my_courses, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_courses, container, false);
         ViewPager2 viewPager2MyCourse = view.findViewById(R.id.viewPagerMyCourse);
         TabLayout tapMyCourse = view.findViewById(R.id.tapMyCourse);
 
@@ -77,6 +80,7 @@ public class myCoursesFragment extends Fragment {
         public ViewPagerAdapter(@NonNull myCoursesFragment fragmentActivity) {
             super(fragmentActivity);
         }
+
         @NonNull
         @Override
         public Fragment createFragment(int position) {

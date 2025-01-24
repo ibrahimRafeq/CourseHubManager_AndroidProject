@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityRegisterBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,23 +39,23 @@ public class Register extends AppCompatActivity {
 
                 if (nameP.isEmpty() || emailP.isEmpty() || passwordP.isEmpty()) {
                     Toast.makeText(Register.this, "Make sure all data is entered", Toast.LENGTH_SHORT).show();
-                } else{
-                        int i = 0;
-                        for (i = 0; i < personList.size(); i++) {
-                            if (personList.get(i).getEmailPerson().equals(emailP) && personList.get(i).getPasswordPerson().equals(passwordP)) {
-                                found = true;
-                            }
+                } else {
+                    int i = 0;
+                    for (i = 0; i < personList.size(); i++) {
+                        if (personList.get(i).getEmailPerson().equals(emailP) && personList.get(i).getPasswordPerson().equals(passwordP)) {
+                            found = true;
                         }
-                        if (found){
-                            Toast.makeText(Register.this, "This account is already registered", Toast.LENGTH_SHORT).show();
-                        }else {
-                            long id = db.personDao().insertPerson(person);
-                            person.setIdPerson(id);
-                            Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Register.this, Login.class);
-                            intent.putExtra("idPerson", person.getIdPerson());
-                            startActivity(intent);
-                        }
+                    }
+                    if (found) {
+                        Toast.makeText(Register.this, "This account is already registered", Toast.LENGTH_SHORT).show();
+                    } else {
+                        long id = db.personDao().insertPerson(person);
+                        person.setIdPerson(id);
+                        Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Register.this, Login.class);
+                        intent.putExtra("idPerson", person.getIdPerson());
+                        startActivity(intent);
+                    }
                 }
 
             }

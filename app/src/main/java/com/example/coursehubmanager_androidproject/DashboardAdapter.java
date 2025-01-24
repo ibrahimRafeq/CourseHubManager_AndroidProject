@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.coursehubmanager_androidproject.databinding.ItemCourseDashboardBinding;
+
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -14,6 +17,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<Course> courseList;
     ItemCourseDashboardBinding dashboardBinding;
     OnItemClick itemClick;
+
     public DashboardAdapter(Context context, List<Course> courseList, OnItemClick itemClick) {
         this.context = context;
         this.courseList = courseList;
@@ -61,15 +65,18 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemCourseDashboardBinding dashboardBinding;
+
         public MyViewHolder(ItemCourseDashboardBinding dashboardBinding) {
             super(dashboardBinding.getRoot());
             this.dashboardBinding = dashboardBinding;
         }
     }
 
-    public interface OnItemClick{
+    public interface OnItemClick {
         void onUpdateClicked(int position);
+
         void onDeleteClicked(int position);
+
         void onSelectedItem(int position);
     }
 }

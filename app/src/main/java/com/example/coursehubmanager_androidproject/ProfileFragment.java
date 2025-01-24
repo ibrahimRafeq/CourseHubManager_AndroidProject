@@ -1,7 +1,6 @@
 package com.example.coursehubmanager_androidproject;
 
 import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ public class ProfileFragment extends Fragment {
     private List<Person> personList;
     private PersonAdapter personAdapter;
     private RecyclerView profileRView;
-    private Button goBookMark, updateProfile, deleteUser;
+    private Button goBookMark;
     private static final String ID_PERSON = "Id_Person";
     private long idPerson;
     private AlertDialog dialog;
@@ -51,12 +50,10 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         profileRView = view.findViewById(R.id.profileRV);
         goBookMark = view.findViewById(R.id.goBookMark);
-        updateProfile = view.findViewById(R.id.updateProfile);
-        deleteUser = view.findViewById(R.id.deleteUser);
 
         personDB = CourseDataBase.getDataBase(getContext());
         personList = new ArrayList<>();
@@ -64,7 +61,17 @@ public class ProfileFragment extends Fragment {
         idPerson = sharedPreferences.getLong("id_person", -1);
 
         personList.addAll(personDB.personDao().getAllPersonById(idPerson));
-        personAdapter = new PersonAdapter(getActivity(), personList);
+        personAdapter = new PersonAdapter(getActivity(), personList, new PersonAdapter.OnItemClick() {
+            @Override
+            public void onDelete(int position) {
+                deleteUser(idPerson);
+            }
+
+            @Override
+            public void onEdit(int position) {
+                showSimpleDialog();
+            }
+        });
         profileRView.setAdapter(personAdapter);
         profileRView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -76,24 +83,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        updateProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateProfileInformation();
-            }
-        });
-
-        deleteUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteUser(idPerson);
-            }
-        });
-
         return view;
     }
 
-    public void updateProfileInformation(){
+    public void updateProfileInformation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         DialogUpdateProfileBinding bindingDialog = DialogUpdateProfileBinding.inflate(getLayoutInflater());
         builder.setView(bindingDialog.getRoot());
@@ -110,13 +103,15 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "The update was successfully", Toast.LENGTH_SHORT).show();
                 refreshPersonList();
                 dialog.dismiss();
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
             }
         });
         dialog = builder.create();
         dialog.show();
     }
 
-    public void deleteUser(long id_person){
+    public void deleteUser(long id_person) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         DialogDeleteUserBinding bindingDialog = DialogDeleteUserBinding.inflate(getLayoutInflater());
         builder.setView(bindingDialog.getRoot());
@@ -140,5 +135,22 @@ public class ProfileFragment extends Fragment {
         personList.clear();
         personList.addAll(personDB.personDao().getAllPersonById(idPerson));
         personAdapter.notifyDataSetChanged();
+    }
+
+    private void showSimpleDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Warning❗❗");
+        builder.setMessage("You will have to log in again");
+
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            updateProfileInformation();
+        });
+
+        builder.setNegativeButton("NO", (dialog, which) -> {
+            Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.coursehubmanager_androidproject.databinding.ItemLessonsBinding;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class LessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemLessonsBinding.inflate(LayoutInflater.from(context), parent,false);
+        binding = ItemLessonsBinding.inflate(LayoutInflater.from(context), parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -52,15 +54,16 @@ public class LessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return lessonsList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemLessonsBinding binding;
+
         public MyViewHolder(ItemLessonsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
     }
 
-    public interface OnItemClick{
+    public interface OnItemClick {
         void onCourseClicked(int position);
     }
 }

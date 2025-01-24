@@ -5,9 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityCourseContentBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class Course_Content extends AppCompatActivity {
         courseDB = CourseDataBase.getDataBase(this);
         lessonsList = new ArrayList<>();
         Intent intent = getIntent();
-        idCourse =  intent.getLongExtra(ARG_COURSE_ID, -1);
+        idCourse = intent.getLongExtra(ARG_COURSE_ID, -1);
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         idPerson = sharedPreferences.getLong("id_person", -1);
 
@@ -53,14 +56,14 @@ public class Course_Content extends AppCompatActivity {
         binding.doYou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.checkBoxFinished.isChecked()){
+                if (binding.checkBoxFinished.isChecked()) {
                     courseDB.personCourseDao().markCourseAsCompleted(idPerson, idCourse);
-                    Toast.makeText(Course_Content.this, "This course has been added to the complete course" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Course_Content.this, "This course has been added to the complete course", Toast.LENGTH_SHORT).show();
                 }
 
-                if (binding.bookMark.isChecked()){
+                if (binding.bookMark.isChecked()) {
                     courseDB.courseDao().updateBookMark(idCourse);
-                    Toast.makeText(Course_Content.this, "This course has been added to the bookMark" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Course_Content.this, "This course has been added to the bookMark", Toast.LENGTH_SHORT).show();
                 }
 
             }

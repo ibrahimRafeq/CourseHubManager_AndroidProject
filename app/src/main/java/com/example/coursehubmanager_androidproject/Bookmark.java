@@ -1,9 +1,12 @@
 package com.example.coursehubmanager_androidproject;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityBookmarkBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,7 @@ public class Bookmark extends AppCompatActivity {
     private List<Course> courseList;
     private CourseDataBase courseDB;
     private CourseAdapter courseAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -5,9 +5,9 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Person.class, parentColumns = {"idPerson"},
-                childColumns = {"personId"},
-                onDelete = ForeignKey.CASCADE // إضافة سياسة الحذف
-        ),
+        childColumns = {"personId"},
+        onDelete = ForeignKey.CASCADE // إضافة سياسة الحذف
+),
         @ForeignKey(entity = Course.class, parentColumns = {"courseId"},
                 childColumns = {"courseId"},
                 onDelete = ForeignKey.CASCADE // إضافة سياسة الحذف
@@ -51,7 +51,6 @@ public class PersonCourse {
     public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
-
 
     public boolean isCompleted() {
         return isCompleted;

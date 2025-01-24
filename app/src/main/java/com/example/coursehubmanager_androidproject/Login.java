@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.coursehubmanager_androidproject.databinding.ActivityLoginBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 

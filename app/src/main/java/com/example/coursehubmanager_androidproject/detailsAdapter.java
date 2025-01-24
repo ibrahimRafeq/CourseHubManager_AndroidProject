@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.coursehubmanager_androidproject.databinding.ItemDetailsBinding;
 
 import java.util.List;
@@ -54,15 +56,16 @@ public class detailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return courseList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemDetailsBinding binding;
+
         public MyViewHolder(ItemDetailsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
     }
 
-    public interface OnItemClick{
+    public interface OnItemClick {
         void onMyCourseClicked(int position);
     }
 }
