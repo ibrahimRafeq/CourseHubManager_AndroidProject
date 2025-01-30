@@ -49,10 +49,10 @@ public class Details extends AppCompatActivity {
                 personCourse.setCourseId(selectedCourseId);
                 Toast.makeText(Details.this, " " + idCourse + " " + idPerson, Toast.LENGTH_SHORT).show();
                 courseDB.personCourseDao().insertPersonCourse(personCourse);
-                Intent intent = new Intent(Details.this, HomeActivity.class);
-                intent.putExtra("course_Id", idCourse);
-                Toast.makeText(Details.this, "The course has been successfully registered", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+//                Intent intent = new Intent(Details.this, HomeActivity.class);
+//                intent.putExtra("course_Id", idCourse);
+//                Toast.makeText(Details.this, "The course has been successfully registered", Toast.LENGTH_SHORT).show();
+//                startActivity(intent);
             }
         });
         binding.detailsRV.setAdapter(detailsAdapter);

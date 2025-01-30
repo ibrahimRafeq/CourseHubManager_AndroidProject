@@ -3,7 +3,6 @@ package com.example.coursehubmanager_androidproject;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-
 import java.util.List;
 
 @Dao
@@ -13,7 +12,7 @@ public interface PersonCourseDao {
 
     @Query("SELECT c.* FROM Course c " +
             "INNER JOIN PersonCourse pc ON c.courseId = pc.courseId " +
-            "WHERE pc.personId = :personId AND c.isCompleted = 0")
+            "WHERE pc.personId = :personId AND pc.isCompleted = 0")
     List<Course> getCoursesForPerson(long personId);
 
     @Query("SELECT c.* FROM Course c " +

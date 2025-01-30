@@ -50,7 +50,6 @@ public class CourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         return courseList.size();
     }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemCourseBinding courseBinding;
 

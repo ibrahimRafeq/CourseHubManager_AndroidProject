@@ -2,6 +2,7 @@ package com.example.coursehubmanager_androidproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -47,6 +48,12 @@ public class Course_Content extends AppCompatActivity {
         lessonsAdapter = new LessonsAdapter(this, lessonsList, new LessonsAdapter.OnItemClick() {
             @Override
             public void onCourseClicked(int position) {
+                Toast.makeText(Course_Content.this, "ok", Toast.LENGTH_SHORT).show();
+
+                String url = "https://example.com";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
 
             }
         });
@@ -69,12 +76,12 @@ public class Course_Content extends AppCompatActivity {
             }
         });
 
-        binding.back1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Course_Content.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
+//        binding.back1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Course_Content.this, HomeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

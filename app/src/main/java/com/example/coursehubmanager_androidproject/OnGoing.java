@@ -2,15 +2,12 @@ package com.example.coursehubmanager_androidproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +50,6 @@ public class OnGoing extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.CourseListRVOnGoing);
         courseDB = CourseDataBase.getDataBase(getActivity());
         courseList = new ArrayList<>();
-
         courseList.addAll(courseDB.personCourseDao().getCoursesForPerson(personId));
         courseAdapter = new CourseAdapter(getActivity(), courseList, new CourseAdapter.OnItemClick() {
             @Override
@@ -66,7 +62,12 @@ public class OnGoing extends Fragment {
         });
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         return view;
+    }
+
+    private void refreshPersonList() {
+        courseList.clear();
+        courseList.addAll(courseDB.personCourseDao().getCoursesForPerson(personId));
+        courseAdapter.notifyDataSetChanged();
     }
 }
