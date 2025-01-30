@@ -69,7 +69,7 @@ public class Course_Content extends AppCompatActivity {
                 }
 
                 if (binding.bookMark.isChecked()) {
-                    courseDB.courseDao().updateBookMark(idCourse);
+                    courseDB.personCourseDao().updateBookMark(idPerson, idCourse);
                     Toast.makeText(Course_Content.this, "This course has been added to the bookMark", Toast.LENGTH_SHORT).show();
                 }
 

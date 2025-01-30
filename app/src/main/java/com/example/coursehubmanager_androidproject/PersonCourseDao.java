@@ -24,6 +24,14 @@ public interface PersonCourseDao {
             "WHERE personId = :personId AND courseId = :courseId AND isCompleted = 0")
     void markCourseAsCompleted(long personId, long courseId);
 
+    @Query("UPDATE PersonCourse SET isBookMark = 1 " +
+            "WHERE personId = :personId AND courseId = :courseId AND isBookMark = 0")
+    void updateBookMark(long personId, long courseId);
+    @Query("SELECT c.* FROM Course c " +
+            "INNER JOIN PersonCourse pc ON c.courseId = pc.courseId " +
+            "WHERE pc.personId = :personId AND pc.isBookMark = 1")
+    List<Course> getBookMarkCourses(long personId);
+
     @Query("SELECT * FROM PersonCourse WHERE courseId = :courseId")
     List<PersonCourse> getPeopleForCourse(long courseId);
 

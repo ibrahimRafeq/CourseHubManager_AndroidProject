@@ -20,6 +20,7 @@ public class PersonCourse {
     private long personId;
     private long courseId;
     private boolean isCompleted;
+    private boolean isBookMark;
 
     // Constructor
     public PersonCourse(long personId, long courseId) {
@@ -58,5 +59,13 @@ public class PersonCourse {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public boolean isBookMark() {
+        return isBookMark;
+    }
+
+    public void setBookMark(boolean bookMark) {
+        isBookMark = bookMark;
     }
 }
