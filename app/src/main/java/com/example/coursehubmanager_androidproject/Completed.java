@@ -2,6 +2,7 @@ package com.example.coursehubmanager_androidproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -62,8 +63,10 @@ public class Completed extends Fragment {
         courseAdapter = new CourseAdapter(getActivity(), courseList, new CourseAdapter.OnItemClick() {
             @Override
             public void onCourseClicked(int position) {
-//                Intent intent = new Intent(getActivity(), Course_Content.class);
-//                startActivity(intent);
+                long courseId_id = courseList.get(position).getCourseId();
+                Intent intent = new Intent(getActivity(), Course_Content.class);
+                intent.putExtra("course_Id", courseId_id);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(courseAdapter);

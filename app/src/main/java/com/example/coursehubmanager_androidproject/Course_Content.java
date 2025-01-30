@@ -75,13 +75,5 @@ public class Course_Content extends AppCompatActivity {
 
             }
         });
-
-//        binding.back1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Course_Content.this, HomeActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 }

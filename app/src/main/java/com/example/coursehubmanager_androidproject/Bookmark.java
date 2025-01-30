@@ -35,7 +35,7 @@ public class Bookmark extends AppCompatActivity {
             @Override
             public void onCourseClicked(int position) {
                 courseDB.personCourseDao().updateBookMark_2(idPerson, courseList.get(position).getCourseId());
-                Toast.makeText(Bookmark.this, "heee", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Bookmark.this, "Removed from list", Toast.LENGTH_SHORT).show();
             }
         });
         binding.bookMarkRV.setAdapter(courseAdapter);

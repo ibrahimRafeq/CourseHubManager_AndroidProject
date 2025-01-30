@@ -64,10 +64,4 @@ public class OnGoing extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
-
-    private void refreshPersonList() {
-        courseList.clear();
-        courseList.addAll(courseDB.personCourseDao().getCoursesForPerson(personId));
-        courseAdapter.notifyDataSetChanged();
-    }
 }
