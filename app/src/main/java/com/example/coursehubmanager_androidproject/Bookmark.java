@@ -2,6 +2,7 @@ package com.example.coursehubmanager_androidproject;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +16,7 @@ public class Bookmark extends AppCompatActivity {
     private ActivityBookmarkBinding binding;
     private List<Course> courseList;
     private CourseDataBase courseDB;
-    private CourseAdapter courseAdapter;
+    private MarkBookAdapter courseAdapter;
     private long idPerson;
 
     @Override
@@ -26,13 +27,15 @@ public class Bookmark extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         idPerson = sharedPreferences.getLong("id_person", -1);
+
         courseList = new ArrayList<>();
         courseDB = CourseDataBase.getDataBase(this);
         courseList.addAll(courseDB.personCourseDao().getBookMarkCourses(idPerson));
-        courseAdapter = new CourseAdapter(this, courseList, new CourseAdapter.OnItemClick() {
+        courseAdapter = new MarkBookAdapter(this, courseList, new MarkBookAdapter.OnItemClick() {
             @Override
             public void onCourseClicked(int position) {
-
+                courseDB.personCourseDao().updateBookMark_2(idPerson, courseList.get(position).getCourseId());
+                Toast.makeText(Bookmark.this, "heee", Toast.LENGTH_SHORT).show();
             }
         });
         binding.bookMarkRV.setAdapter(courseAdapter);
