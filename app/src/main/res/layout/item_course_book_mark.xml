@@ -71,6 +71,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imageItemCourse" />
 
             <ImageView
+                android:id="@+id/deleteBookMark"
                 android:layout_margin="16dp"
                 android:src="@drawable/baseline_delete_forever_24"
                 android:layout_width="wrap_content"

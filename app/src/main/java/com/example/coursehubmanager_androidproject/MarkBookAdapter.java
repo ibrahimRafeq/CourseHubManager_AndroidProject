@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coursehubmanager_androidproject.databinding.ItemCourseBinding;
 import com.example.coursehubmanager_androidproject.databinding.ItemCourseBookMarkBinding;
 
 import java.util.List;
@@ -39,6 +38,12 @@ public class MarkBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myViewHolder.markBinding.nameCourseTV.setText(course.getCourseName());
         myViewHolder.markBinding.instructorName.setText(course.getCourseLecturer());
         myViewHolder.markBinding.description.setText(course.getCourseDetails());
+        myViewHolder.markBinding.deleteBookMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClick.onDelete(position);
+            }
+        });
         myViewHolder.markBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +56,7 @@ public class MarkBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemCount() {
         return courseList.size();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemCourseBookMarkBinding markBinding;
 
@@ -61,6 +67,9 @@ public class MarkBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnItemClick {
+        void onDelete(int position);
+
         void onCourseClicked(int position);
+
     }
 }
