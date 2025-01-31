@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -35,9 +36,23 @@ public class Bookmark extends AppCompatActivity {
         courseAdapter = new MarkBookAdapter(this, courseList, new MarkBookAdapter.OnItemClick() {
             @Override
             public void onDelete(int position) {
-                courseDB.personCourseDao().updateBookMark_2(idPerson, courseList.get(position).getCourseId());
-                Toast.makeText(Bookmark.this, "Removed from list", Toast.LENGTH_SHORT).show();
-                refreshPersonList();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Bookmark.this);
+                builder.setTitle("BookMark ♦");
+                builder.setMessage("This Course will be removed from the list");
+                builder.setPositiveButton("OK", (dialog, which) -> {
+
+                    courseDB.personCourseDao().updateBookMark_2(idPerson, courseList.get(position).getCourseId());
+                    Toast.makeText(Bookmark.this, "Removed from list", Toast.LENGTH_SHORT).show();
+                    refreshPersonList();
+                });
+
+                builder.setNegativeButton("NO", (dialog, which) -> {
+                    Toast.makeText(Bookmark.this, "Canceled", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
 
             @Override

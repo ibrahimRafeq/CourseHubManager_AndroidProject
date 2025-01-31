@@ -20,11 +20,6 @@ public class myCoursesFragment extends Fragment {
     private long courseId;
     private long personId;
     private final int count = 2;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
 
     public myCoursesFragment() {
     }
@@ -61,13 +56,12 @@ public class myCoursesFragment extends Fragment {
                 switch (position) {
                     case 0:
                         tab.setText("On Going");
-                        tab.setIcon(R.drawable.baseline_filter_1_24);
-                        tab.getOrCreateBadge().setText("4");
+                        tab.setIcon(R.drawable.ongoing);
                         break;
 
                     case 1:
                         tab.setText("Completed");
-                        tab.setIcon(R.drawable.baseline_filter_2_24);
+                        tab.setIcon(R.drawable.oncomplet);
                         break;
                 }
             }
@@ -84,16 +78,13 @@ public class myCoursesFragment extends Fragment {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            String category = "";
             Fragment fragment = null;
             switch (position) {
                 case 0:
                     fragment = new OnGoing().newInstance(courseId, personId);
-                    category = "On Going";
                     break;
                 case 1:
                     fragment = new Completed();
-                    category = "Completed";
                     break;
             }
             return fragment;

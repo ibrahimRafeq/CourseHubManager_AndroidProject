@@ -1,20 +1,25 @@
 package com.example.coursehubmanager_androidproject;
 
 import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.example.coursehubmanager_androidproject.databinding.DialogDeleteUserBinding;
 import com.example.coursehubmanager_androidproject.databinding.DialogUpdateProfileBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +29,7 @@ public class ProfileFragment extends Fragment {
     private List<Person> personList;
     private PersonAdapter personAdapter;
     private RecyclerView profileRView;
-    private Button goBookMark;
+    private ImageView goBookMark;
     private static final String ID_PERSON = "Id_Person";
     private long idPerson;
     private AlertDialog dialog;
@@ -44,7 +49,6 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            idPerson = getArguments().getLong(ID_PERSON);
         }
     }
 

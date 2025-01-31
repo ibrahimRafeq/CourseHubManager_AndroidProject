@@ -1,6 +1,7 @@
 
 package com.example.coursehubmanager_androidproject;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,11 +37,14 @@ public class BookMark_CourseContent extends AppCompatActivity {
         lessonsAdapter = new LessonsAdapter(this, lessonsList, new LessonsAdapter.OnItemClick() {
             @Override
             public void onCourseClicked(int position) {
-                Toast.makeText(BookMark_CourseContent.this, "ok", Toast.LENGTH_SHORT).show();
-                String url = "https://example.com";
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
+                try {
+                    String url = lessonsList.get(position).getURL();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(BookMark_CourseContent.this, "The link could not be opened.!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         binding.RVLessonsCourseBookMark.setAdapter(lessonsAdapter);

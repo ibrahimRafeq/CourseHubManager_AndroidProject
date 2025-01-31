@@ -53,26 +53,26 @@ public class HomeFragment extends Fragment {
                 switch (position) {
                     case 0:
                         tab.setText("Android");
-                        tab.setIcon(R.drawable.baseline_filter_1_24);
+                        tab.setIcon(R.drawable.android);
                         tab.getOrCreateBadge().setText("4");
                         break;
 
                     case 1:
                         tab.setText("Web");
-                        tab.setIcon(R.drawable.baseline_filter_2_24);
+                        tab.setIcon(R.drawable.web);
                         break;
 
                     case 2:
                         tab.setText("Malte Media");
-                        tab.setIcon(R.drawable.baseline_filter_3_24);
+                        tab.setIcon(R.drawable.multimedia);
                         break;
                     case 3:
                         tab.setText("Cyber Security");
-                        tab.setIcon(R.drawable.baseline_filter_3_24);
+                        tab.setIcon(R.drawable.siper);
                         break;
                     case 4:
                         tab.setText("Computer Science");
-                        tab.setIcon(R.drawable.baseline_filter_3_24);
+                        tab.setIcon(R.drawable.computer);
                         break;
                 }
             }

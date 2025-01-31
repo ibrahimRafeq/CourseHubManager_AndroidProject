@@ -72,7 +72,6 @@ public class Dashboard extends AppCompatActivity {
                 showDeleteCourseDialog(id, category, courseName, coursePrice, courseNumHours, courseNumberStudent, courseLecturer, courseDetails);
             }
 
-
             @Override
             public void onSelectedItem(int position) {
                 long id = courseList.get(position).getCourseId();
@@ -229,5 +228,4 @@ public class Dashboard extends AppCompatActivity {
         courseList.addAll(courseDB.courseDao().getAllCourse());
         dashboardAdapter.notifyDataSetChanged();
     }
-
 }

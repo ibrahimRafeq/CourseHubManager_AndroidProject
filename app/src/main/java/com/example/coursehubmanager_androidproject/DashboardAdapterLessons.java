@@ -36,6 +36,7 @@ public class DashboardAdapterLessons extends RecyclerView.Adapter<RecyclerView.V
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         Lessons lessons = lessonsList.get(position);
         myViewHolder.lessonDashboardBinding.nameTheLesson.setText(lessons.getTitle());
+        myViewHolder.lessonDashboardBinding.linkTheLesson.setText(lessons.getURL());
         myViewHolder.lessonDashboardBinding.deleteLessonDash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
