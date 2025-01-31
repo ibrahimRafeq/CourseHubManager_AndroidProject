@@ -43,16 +43,19 @@ public class Details extends AppCompatActivity {
         detailsAdapter = new detailsAdapter(this, courseList, new detailsAdapter.OnItemClick() {
             @Override
             public void onMyCourseClicked(int position) {
+
                 long selectedCourseId = courseList.get(position).getCourseId();
-                PersonCourse personCourse = new PersonCourse(idPerson, selectedCourseId);
-                personCourse.setPersonId(idPerson);
-                personCourse.setCourseId(selectedCourseId);
-                Toast.makeText(Details.this, " " + idCourse + " " + idPerson, Toast.LENGTH_SHORT).show();
-                courseDB.personCourseDao().insertPersonCourse(personCourse);
-//                Intent intent = new Intent(Details.this, HomeActivity.class);
-//                intent.putExtra("course_Id", idCourse);
-//                Toast.makeText(Details.this, "The course has been successfully registered", Toast.LENGTH_SHORT).show();
-//                startActivity(intent);
+                boolean isAlreadyRegistered = courseDB.personCourseDao().isPersonRegistered(idPerson, selectedCourseId);
+
+                if (isAlreadyRegistered) {
+                    Toast.makeText(Details.this, "أنت مسجل بالفعل في هذا الكورس", Toast.LENGTH_SHORT).show();
+                } else {
+                    PersonCourse personCourse = new PersonCourse(idPerson, selectedCourseId);
+                    personCourse.setPersonId(idPerson);
+                    personCourse.setCourseId(selectedCourseId);
+                    Toast.makeText(Details.this, " " + idCourse + " " + idPerson, Toast.LENGTH_SHORT).show();
+                    courseDB.personCourseDao().insertPersonCourse(personCourse);
+                }
             }
         });
         binding.detailsRV.setAdapter(detailsAdapter);

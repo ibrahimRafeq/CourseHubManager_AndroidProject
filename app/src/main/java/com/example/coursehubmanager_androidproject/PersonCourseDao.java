@@ -41,4 +41,6 @@ public interface PersonCourseDao {
 
     @Query("DELETE FROM PersonCourse WHERE personId = :personId AND courseId = :courseId")
     void deletePersonCourse(long personId, long courseId);
+    @Query("SELECT EXISTS(SELECT 1 FROM PersonCourse WHERE personId = :personId AND courseId = :courseId)")
+    boolean isPersonRegistered(long personId, long courseId);
 }

@@ -66,6 +66,8 @@ public class Course_Content extends AppCompatActivity {
                 if (binding.checkBoxFinished.isChecked()) {
                     courseDB.personCourseDao().markCourseAsCompleted(idPerson, idCourse);
                     Toast.makeText(Course_Content.this, "This course has been added to the complete course", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(intent1);
                 }
 
                 if (binding.bookMark.isChecked()) {
