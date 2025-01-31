@@ -178,6 +178,7 @@ public class Dashboard extends AppCompatActivity {
                     course.setCourseId(courseId);
                     long id = courseDB.courseDao().updateCourse(course);
                     Toast.makeText(Dashboard.this, "The Edition was successfully completed", Toast.LENGTH_SHORT).show();
+                    refreshCourseList();
                     dialog.dismiss();
                     if (ContextCompat.checkSelfPermission(getApplicationContext(),
                             android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
