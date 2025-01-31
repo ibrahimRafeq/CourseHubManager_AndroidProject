@@ -124,19 +124,30 @@ public class Dashboard extends AppCompatActivity {
                         } else if (checkedId == R.id.computerScience) {
                             selectedOp = "Computer Science";
                         }
-                        Course course = new Course(selectedOp, courseName, coursePrice, Integer.valueOf(courseNumHours), Integer.valueOf(courseNumberStudent), courseLecturer, courseDetails);
-                        long id = courseDB.courseDao().insertCourse(course);
-                        course.setCourseId(id);
-                        Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
-                        refreshCourseList();
-                        dialog.dismiss();
-
-                        if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                                android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                            notification.createNotification();
+                        boolean isFound = false;
+                        for (int i = 0; i < courseList.size(); i++) {
+                            if (courseList.get(i).getCategory().equals(selectedOp) &&courseList.get(i).getCourseName().equals(courseName) && courseList.get(i).getCoursePrice().equals(coursePrice) && courseList.get(i).getCourseHours() == Integer.valueOf(courseNumHours) && courseList.get(i).getCourse_NumberStudent() == Integer.valueOf(courseNumberStudent) && courseList.get(i).getCourseLecturer().equals(courseLecturer) && courseList.get(i).getCourseDetails().equals(courseDetails)) {
+                                isFound = true;
+                                break;
+                            }
+                        }
+                        if (isFound) {
+                            Toast.makeText(Dashboard.this, "This course is already exist", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                                launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                            Course course = new Course(selectedOp, courseName, coursePrice, Integer.valueOf(courseNumHours), Integer.valueOf(courseNumberStudent), courseLecturer, courseDetails);
+                            long id = courseDB.courseDao().insertCourse(course);
+                            course.setCourseId(id);
+                            Toast.makeText(Dashboard.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
+                            refreshCourseList();
+                            dialog.dismiss();
+
+                            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                                    android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                                notification.createNotification();
+                            } else {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                    launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                                }
                             }
                         }
                     }
@@ -181,18 +192,29 @@ public class Dashboard extends AppCompatActivity {
                         } else if (checkedId == R.id.computerScience) {
                             newSelectedOp = "Computer Science";
                         }
-                        Course course = new Course(newSelectedOp, courseNewName, courseNewPrice, Integer.valueOf(courseNewNumHours), Integer.valueOf(courseNewNumberStudent), courseNewLecturer, courseNewDetails);
-                        course.setCourseId(courseId);
-                        long id = courseDB.courseDao().updateCourse(course);
-                        Toast.makeText(Dashboard.this, "The Edition was successfully completed", Toast.LENGTH_SHORT).show();
-                        refreshCourseList();
-                        dialog.dismiss();
-                        if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                                android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                            notification.createNotification();
+                        boolean isFound = false;
+                        for (int i = 0; i < courseList.size(); i++) {
+                            if (courseList.get(i).getCategory().equals(newSelectedOp) && courseList.get(i).getCourseName().equals(courseNewName) && courseList.get(i).getCoursePrice().equals(courseNewPrice) && courseList.get(i).getCourseHours() == Integer.valueOf(courseNewNumHours) && courseList.get(i).getCourse_NumberStudent() == Integer.valueOf(courseNewNumberStudent) && courseList.get(i).getCourseLecturer().equals(courseNewLecturer) && courseList.get(i).getCourseDetails().equals(courseNewDetails)) {
+                                isFound = true;
+                                break;
+                            }
+                        }
+                        if (isFound) {
+                            Toast.makeText(Dashboard.this, "This course is already exist", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                                launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                            Course course = new Course(newSelectedOp, courseNewName, courseNewPrice, Integer.valueOf(courseNewNumHours), Integer.valueOf(courseNewNumberStudent), courseNewLecturer, courseNewDetails);
+                            course.setCourseId(courseId);
+                            long id = courseDB.courseDao().updateCourse(course);
+                            Toast.makeText(Dashboard.this, "The Edition was successfully completed", Toast.LENGTH_SHORT).show();
+                            refreshCourseList();
+                            dialog.dismiss();
+                            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                                    android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                                notification.createNotification();
+                            } else {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                    launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                                }
                             }
                         }
                     }
