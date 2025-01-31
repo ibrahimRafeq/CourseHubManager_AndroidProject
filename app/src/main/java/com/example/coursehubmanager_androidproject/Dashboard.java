@@ -192,6 +192,7 @@ public class Dashboard extends AppCompatActivity {
                         } else if (checkedId == R.id.computerScience) {
                             newSelectedOp = "Computer Science";
                         }
+
                         boolean isFound = false;
                         for (int i = 0; i < courseList.size(); i++) {
                             if (courseList.get(i).getCategory().equals(newSelectedOp) && courseList.get(i).getCourseName().equals(courseNewName) && courseList.get(i).getCoursePrice().equals(courseNewPrice) && courseList.get(i).getCourseHours() == Integer.valueOf(courseNewNumHours) && courseList.get(i).getCourse_NumberStudent() == Integer.valueOf(courseNewNumberStudent) && courseList.get(i).getCourseLecturer().equals(courseNewLecturer) && courseList.get(i).getCourseDetails().equals(courseNewDetails)) {
