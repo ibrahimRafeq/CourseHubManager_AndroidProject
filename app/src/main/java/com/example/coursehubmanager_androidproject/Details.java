@@ -1,13 +1,10 @@
 package com.example.coursehubmanager_androidproject;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.coursehubmanager_androidproject.databinding.ActivityDetailsBinding;
@@ -37,7 +34,7 @@ public class Details extends AppCompatActivity {
         courseList.addAll(courseDB.courseDao().getAllCourseDetails(idCourse));
 
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        long idPerson = sharedPreferences.getLong("id_person", -1);
+        idPerson = sharedPreferences.getLong("id_person", -1);
 
 
         detailsAdapter = new detailsAdapter(this, courseList, new detailsAdapter.OnItemClick() {
@@ -48,12 +45,12 @@ public class Details extends AppCompatActivity {
                 boolean isAlreadyRegistered = courseDB.personCourseDao().isPersonRegistered(idPerson, selectedCourseId);
 
                 if (isAlreadyRegistered) {
-                    Toast.makeText(Details.this, "أنت مسجل بالفعل في هذا الكورس", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Details.this, "You are already registered in this course", Toast.LENGTH_SHORT).show();
                 } else {
                     PersonCourse personCourse = new PersonCourse(idPerson, selectedCourseId);
                     personCourse.setPersonId(idPerson);
                     personCourse.setCourseId(selectedCourseId);
-                    Toast.makeText(Details.this, " " + idCourse + " " + idPerson, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Details.this, "Registration successfully", Toast.LENGTH_SHORT).show();
                     courseDB.personCourseDao().insertPersonCourse(personCourse);
                 }
             }

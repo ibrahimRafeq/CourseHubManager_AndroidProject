@@ -54,14 +54,11 @@ public class HomeFragment extends Fragment {
                     case 0:
                         tab.setText("Android");
                         tab.setIcon(R.drawable.android);
-                        tab.getOrCreateBadge().setText("4");
                         break;
-
                     case 1:
                         tab.setText("Web");
                         tab.setIcon(R.drawable.web);
                         break;
-
                     case 2:
                         tab.setText("Malte Media");
                         tab.setIcon(R.drawable.multimedia);

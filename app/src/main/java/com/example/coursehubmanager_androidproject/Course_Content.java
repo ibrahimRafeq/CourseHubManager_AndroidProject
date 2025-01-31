@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.coursehubmanager_androidproject.databinding.ActivityCourseContentBinding;
-import com.example.coursehubmanager_androidproject.databinding.DialogAddCourseBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +76,7 @@ public class Course_Content extends AppCompatActivity {
         }
     }
 
-    public void addTheBookMark(){
+    public void addTheBookMark() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Course_Content.this);
         builder.setTitle("BookMark ♦");
         builder.setMessage("This course will be added to the bookmark list");
@@ -95,17 +94,17 @@ public class Course_Content extends AppCompatActivity {
         dialog.show();
     }
 
-    public void addTheCompleteCourse(){
+    public void addTheCompleteCourse() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Course_Content.this);
         builder.setTitle("Complete Course ✔✔");
         builder.setMessage("The page will be UPDATE !");
         builder.setPositiveButton("OK", (dialog, which) -> {
 
-        courseDB.personCourseDao().markCourseAsCompleted(idPerson, idCourse);
-        Toast.makeText(Course_Content.this, "This course has been added to the complete course", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
-    });
+            courseDB.personCourseDao().markCourseAsCompleted(idPerson, idCourse);
+            Toast.makeText(Course_Content.this, "This course has been added to the complete course", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+        });
         builder.setNegativeButton("NO", (dialog, which) -> {
             Toast.makeText(Course_Content.this, "Canceled", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
