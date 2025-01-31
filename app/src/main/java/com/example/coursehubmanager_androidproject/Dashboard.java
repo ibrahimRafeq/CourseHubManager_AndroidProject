@@ -203,7 +203,6 @@ public class Dashboard extends AppCompatActivity {
         deleteBinding.deleteButDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Course course = new Course(category, courseName, coursePrice, courseNumHours, courseNumberStudent, courseLecturer, courseDetails);
                 course.setCourseId(courseId);
                 long id = courseDB.courseDao().deleteCourse(course);
