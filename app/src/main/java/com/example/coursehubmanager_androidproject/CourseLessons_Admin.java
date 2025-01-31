@@ -75,16 +75,19 @@ public class CourseLessons_Admin extends AppCompatActivity {
                 String lessonTitle = bindingDialogLesson.etTitleLesson.getText().toString();
                 String lessonURL = bindingDialogLesson.etURL.getText().toString();
 
-                Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
-                long id = courseDB.lessonsDao().insertLesson(lessons);
-                lessons.setIdLesson(id);
-                Toast.makeText(CourseLessons_Admin.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
-                refreshLessonList();
-                dialog.dismiss();
 
+                if (lessonTitle.isEmpty() || lessonURL.isEmpty()) {
+                    Toast.makeText(CourseLessons_Admin.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Lessons lessons = new Lessons(lessonTitle, lessonURL, courseId);
+                    long id = courseDB.lessonsDao().insertLesson(lessons);
+                    lessons.setIdLesson(id);
+                    Toast.makeText(CourseLessons_Admin.this, "The addition was successfully completed", Toast.LENGTH_SHORT).show();
+                    refreshLessonList();
+                    dialog.dismiss();
+                }
             }
         });
-
         dialog = builder.create();
         dialog.show();
     }
@@ -99,14 +102,16 @@ public class CourseLessons_Admin extends AppCompatActivity {
             public void onClick(View view) {
                 String lessonTitle = editLessonsBinding.etNewTitleLesson.getText().toString();
                 String lessonURL = editLessonsBinding.etNewURL.getText().toString();
-
-                Lessons lessons = new Lessons(lessonTitle, lessonURL, idCourse);
-                lessons.setIdLesson(lessonId);
-                long id = courseDB.lessonsDao().updateLesson(lessons);
-
-                Toast.makeText(CourseLessons_Admin.this, "The edition was successfully", Toast.LENGTH_SHORT).show();
-                refreshLessonList();
-                dialog.dismiss();
+                if (lessonTitle.isEmpty() || lessonURL.isEmpty()) {
+                    Toast.makeText(CourseLessons_Admin.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Lessons lessons = new Lessons(lessonTitle, lessonURL, idCourse);
+                    lessons.setIdLesson(lessonId);
+                    long id = courseDB.lessonsDao().updateLesson(lessons);
+                    Toast.makeText(CourseLessons_Admin.this, "The edition was successfully", Toast.LENGTH_SHORT).show();
+                    refreshLessonList();
+                    dialog.dismiss();
+                }
             }
         });
 

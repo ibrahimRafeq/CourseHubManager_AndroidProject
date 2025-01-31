@@ -163,33 +163,37 @@ public class Dashboard extends AppCompatActivity {
                 String courseNewLecturer = dialogEditeCourse.newNameLecturer.getText().toString();
                 String courseNewDetails = dialogEditeCourse.newCourseDescription.getText().toString();
                 String newSelectedOp = "";
-                int checkedId = dialogEditeCourse.radioGroupDialog.getCheckedRadioButtonId();
-                if (checkedId == -1) {
-                    Toast.makeText(getApplicationContext(), "Please select an option", Toast.LENGTH_SHORT).show();
+                if (courseNewName.isEmpty() || courseNewPrice.isEmpty() || courseNewNumHours.isEmpty() || courseNewNumberStudent.isEmpty() || courseNewLecturer.isEmpty() || courseNewDetails.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter complete data", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (checkedId == R.id.android) {
-                        newSelectedOp = "Android";
-                    } else if (checkedId == R.id.web) {
-                        newSelectedOp = "Web";
-                    } else if (checkedId == R.id.multiMidea) {
-                        newSelectedOp = "Malte Media";
-                    } else if (checkedId == R.id.cyberScurty) {
-                        newSelectedOp = "Cyber Security";
-                    } else if (checkedId == R.id.computerScience) {
-                        newSelectedOp = "Computer Science";
-                    }
-                    Course course = new Course(newSelectedOp, courseNewName, courseNewPrice, Integer.valueOf(courseNewNumHours), Integer.valueOf(courseNewNumberStudent), courseNewLecturer, courseNewDetails);
-                    course.setCourseId(courseId);
-                    long id = courseDB.courseDao().updateCourse(course);
-                    Toast.makeText(Dashboard.this, "The Edition was successfully completed", Toast.LENGTH_SHORT).show();
-                    refreshCourseList();
-                    dialog.dismiss();
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                            android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                        notification.createNotification();
+                    int checkedId = dialogEditeCourse.radioGroupDialog.getCheckedRadioButtonId();
+                    if (checkedId == -1) {
+                        Toast.makeText(getApplicationContext(), "Please select an option", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                        if (checkedId == R.id.android) {
+                            newSelectedOp = "Android";
+                        } else if (checkedId == R.id.web) {
+                            newSelectedOp = "Web";
+                        } else if (checkedId == R.id.multiMidea) {
+                            newSelectedOp = "Malte Media";
+                        } else if (checkedId == R.id.cyberScurty) {
+                            newSelectedOp = "Cyber Security";
+                        } else if (checkedId == R.id.computerScience) {
+                            newSelectedOp = "Computer Science";
+                        }
+                        Course course = new Course(newSelectedOp, courseNewName, courseNewPrice, Integer.valueOf(courseNewNumHours), Integer.valueOf(courseNewNumberStudent), courseNewLecturer, courseNewDetails);
+                        course.setCourseId(courseId);
+                        long id = courseDB.courseDao().updateCourse(course);
+                        Toast.makeText(Dashboard.this, "The Edition was successfully completed", Toast.LENGTH_SHORT).show();
+                        refreshCourseList();
+                        dialog.dismiss();
+                        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                                android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                            notification.createNotification();
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                launcher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                            }
                         }
                     }
                 }
