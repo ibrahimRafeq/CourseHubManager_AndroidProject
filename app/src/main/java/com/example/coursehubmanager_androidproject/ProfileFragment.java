@@ -101,14 +101,30 @@ public class ProfileFragment extends Fragment {
                 String name = bindingDialog.etNamePersonUP.getText().toString();
                 String email = bindingDialog.etEmailPersonUP.getText().toString();
                 String password = bindingDialog.etPasswordPersonUP.getText().toString();
-                Person person = new Person(name, email, password);
-                person.setIdPerson(idPerson);
-                int id = personDB.personDao().updatePerson(person);
-                Toast.makeText(getActivity(), "The update was successfully", Toast.LENGTH_SHORT).show();
-                refreshPersonList();
-                dialog.dismiss();
-                Intent intent = new Intent(getActivity(), Login.class);
-                startActivity(intent);
+
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                }else {
+                boolean check = false;
+                for (int i = 0; i < personList.size(); i++) {
+                    if (email.equals(personList.get(i).getEmailPerson()) && password.equals(personList.get(i).getPasswordPerson())) {
+                        check = true;
+                        break;
+                    }
+                }
+                if (check) {
+                    Toast.makeText(getActivity(), "This email is already in use", Toast.LENGTH_SHORT).show();
+                } else {
+                    Person person = new Person(name, email, password);
+                    person.setIdPerson(idPerson);
+                    int id = personDB.personDao().updatePerson(person);
+                    Toast.makeText(getActivity(), "The update was successfully", Toast.LENGTH_SHORT).show();
+                    refreshPersonList();
+                    dialog.dismiss();
+                    Intent intent = new Intent(getActivity(), Login.class);
+                    startActivity(intent);
+                }
+            }
             }
         });
         dialog = builder.create();

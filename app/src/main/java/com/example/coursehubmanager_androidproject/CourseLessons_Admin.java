@@ -25,7 +25,6 @@ public class CourseLessons_Admin extends AppCompatActivity {
     private AlertDialog dialog;
     private long idCourse;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
